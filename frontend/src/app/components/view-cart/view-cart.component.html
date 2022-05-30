@@ -1,0 +1,56 @@
+<div class="centered-content">
+  <div class="container">
+    <div class="shop-lists">
+      <h1 class="shop-lists-title">Shop Lists</h1>
+      <div class="shop-lists-content">
+        <a class="shop-lists-item" *ngFor="let list of lists" [routerLink]="['/lists', list._id]" routerLinkActive="is-active">
+          <p>{{ list.title }}</p>
+        </a>
+      </div>
+      <button class="list-menu" mat-icon-button [matMenuTriggerFor]="listMenu" aria-label="Example icon-button with a menu">
+        <mat-icon>settings</mat-icon>
+      </button>
+      <mat-menu #listMenu="matMenu">
+        <button (click)="editListModal(listId)" mat-menu-item>Edit</button>
+        <button (click)="onDeleteListClick()" style="color: red" mat-menu-item>Delete</button>
+      </mat-menu>
+      <button class="shop-lists-button" (click)="openNewListModal()">+ Add list</button>
+    </div>
+
+    <div class="goods-list">
+      <h1 class="goods-list-title">{{ this.currentListTitle }}</h1>
+
+
+      <div class="goods-list-content">
+        <h3 class="empty-state-text" *ngIf="goods?.length === 0">There are no goods here! Click the add button to create
+          a new good.</h3>
+        <div class="goods-list-wrapper" *ngFor="let good of goods" >
+          <a class="goods-list-item" (click)="onGoodClick(good)" [ngClass]="{'completed': good.completed, 'important': good.important}">
+            <p>{{ good.title }}</p>
+          </a>
+          <button class="goods-list-menu-button" mat-icon-button [matMenuTriggerFor]="goodMenu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #goodMenu="matMenu">
+            <button mat-menu-item (click)="onSetAsImportantClick(good)">
+              <mat-icon style="color: #ffeb3b">info</mat-icon>
+              <span>{{ good.important ? 'Unmark' : 'Mark as important' }}</span>
+            </button>
+            <button mat-menu-item (click)="editGoodModal(good)">
+              <mat-icon>edit</mat-icon>
+              <span>Edit</span>
+            </button>
+            <button mat-menu-item (click)="onDeleteGoodClick(good)">
+              <mat-icon color="warn">delete</mat-icon>
+              <span>Remove</span>
+            </button>
+          </mat-menu>
+        </div>
+
+      </div>
+      <button [disabled]="!listId" (click)="openNewGoodModal()" class="goods-list-button">
+        + Add Good
+      </button>
+    </div>
+  </div>
+</div>

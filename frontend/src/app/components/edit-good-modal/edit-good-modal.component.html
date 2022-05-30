@@ -1,0 +1,25 @@
+<div class="modal-container">
+  <h3 style="text-align: center">Edit a Good</h3>
+  <form>
+    <mat-form-field appearance='fill' style="width: 100%">
+      <mat-label>Good name</mat-label>
+      <input
+        type="text"
+        [ngModelOptions]="{standalone: true}"
+        value="data.goodTitleToEdit"
+        (keydown)="noFirstSpace($event)"
+        [(ngModel)]="data.goodTitleToEdit"
+        #inputTitle
+        style="font-size: 18px"
+        matInput >
+    </mat-form-field>
+    <mat-error style="text-align: center" *ngIf="inputTitle.value.length > 30">
+      <p>Max length is 30!</p>
+    </mat-error>
+    <div class="button-container">
+      <button mat-button color="warn" type="button" (click)="onNoClick()">Close</button>
+      <button type="submit" [disabled]="inputTitle.value.length === 0 || inputTitle.value.length > 30" mat-button color="primary" [mat-dialog-close]="data.goodTitleToEdit" >Edit</button>
+    </div>
+  </form>
+</div>
+
