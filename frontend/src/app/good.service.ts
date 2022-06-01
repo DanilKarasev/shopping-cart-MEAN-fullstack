@@ -59,4 +59,8 @@ export class GoodService {
   removeGood(good: Good) {
     return this.webReqService.delete(`lists/${good._listId}/goods/${good._id}`);
   }
+
+  removeAllGoods(listId: string) {
+    return this.webReqService.delete(`lists/${listId}/goods`);
+  }
 }

@@ -12,7 +12,8 @@
       </button>
       <mat-menu #listMenu="matMenu">
         <button (click)="editListModal(listId)" mat-menu-item>Edit</button>
-        <button (click)="onDeleteListClick()" style="color: red" mat-menu-item>Delete</button>
+        <button (click)="onDeleteAllGoodsClick()" mat-menu-item>Clear All Goods</button>
+        <button (click)="onDeleteListClick()" style="color: red" mat-menu-item>Delete List</button>
       </mat-menu>
       <button class="shop-lists-button" (click)="openNewListModal()">+ Add list</button>
     </div>

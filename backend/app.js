@@ -148,3 +148,12 @@ app.delete("/lists/:listId/goods/:goodId", (req, res) => {
     res.send(removedGoodDoc);
   });
 });
+
+app.delete("/lists/:listId/goods", (req, res) => {
+  // We want to delete the specific good
+  Good.deleteMany({
+    _listId: req.params.listId,
+  }).then((removedGoodsDoc) => {
+    res.send(removedGoodsDoc);
+  });
+});
